@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Mode</title>
+    <style>
+        body {
+            background-color: #369FFF;
+            margin: 0;
+            padding: 0;
+            font-family: 'McLaren', sans-serif; /* Set font to McLaren */
+            
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .banner {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .banner.left {
+            left: 0;
+            background-color: #D4EBFF;
+            color: black;
+        }
+
+        .banner.right {
+            right: 0;
+            background-color: #D4EBFF;
+            color: black;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background-color: #D4EBFF;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .picture {
+            position: relative;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<link href="https://fonts.googleapis.com/css2?family=McLaren&display=swap" rel="stylesheet">
+<body>
+    <div class="navbar">Raise hand here to turn on labels</div>
+    <div class="container">
+        <div class="banner left">Walk here to go back to menu!</div>
+        <div class="banner right">Walk here to start "Quiz" mode!</div>
+        <div class="picture">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Internal_organs.png" height="700" alt="Example Picture">
+        </div>
+    </div>
+</body>
+</html>
