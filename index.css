@@ -1,0 +1,17 @@
+body {
+    background-color: #369FFF; /* Blue background color */
+}
+.title-screen {
+    text-align: center;
+    padding: 100px; /* Adjust padding to desired size */
+    color: #fff; /* White text color */
+    font-family: 'McLaren', sans-serif; /* Set font to McLaren */   
+}
+h1 {
+    font-size: 48px; /* Adjust font size to desired size */
+    color: black;
+}
+h2 {
+font-size: 24px; /* Adjust font size to desired size */
+color: black;
+}
