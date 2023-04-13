@@ -1,0 +1,70 @@
+body {
+    font-family: 'McLaren', sans-serif; /* Set font to McLaren */
+    background-color: #369FFF;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.line {
+    border-left: 1px solid black;
+    height: 90vh;
+    margin: 0 20px;
+}
+
+.left, .right {
+    flex: 1;
+    text-align: center;
+    font-size: 24px;
+}
+
+.left {
+    font-family: 'McLaren', sans-serif; /* Set font to McLaren */
+    padding-right: 20px;
+ }
+
+.right {
+    font-family: 'McLaren', sans-serif; /* Set font to McLaren */
+    padding-left: 20px;
+ }
+/* Style for the square */
+.exit-square {
+    position: absolute; /* Absolute positioning to overlap content */
+    top: 0; /* Positioned at the top */
+    left: 0; /* Positioned at the left */
+    width: 100px; /* Width of the square */
+    height: 100px; /* Height of the square */
+    background-color: #D4EBFF; /* Background color of the square */
+    color: black; /* Text color inside the square */
+    padding: 20px; /* Padding inside the square */
+    font-size: 18px; /* Font size of the text inside the square */
+}
+/* Style for the circle overlay */
+.circle-overlay {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #D4EBFF; 
+    color: black; 
+    text-align: center;
+    line-height: 60px;
+    font-size: 48px;
+    z-index: 9999; /* Set a high z-index to overlap content */
+line-height: 120px; /* vertically align text in circle */
+}
+.t {
+ font-family: 'McLaren', sans-serif;
+    background-color: #369FFF;
+    font-size: 54px;
+}
+.t2 {
+    font-family: 'McLaren', sans-serif; /* Set font to McLaren */
+    background-color: #369FFF;
+    font-size: 24px;
+}
