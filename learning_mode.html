@@ -5,19 +5,26 @@
     <link rel="stylesheet" href="learning_mode.css">
     <title>Learning Mode</title>
     <script>
-        function changeImage() {
-          document.getElementById("learning_image").src = "no_label.png";
-          document.getElementById("learning_image").height="700"
+        function toggleImage() {
+          var learningImage = document.getElementById("learning_image");
+          var imageName = learningImage.src.split('/').pop();
+          
+          if (imageName === "label.png") {
+            learningImage.src = "no_label.png";
+          } else {
+            learningImage.src = "label.png";
+          }
+          learningImage.height="700";
         }
     </script>
 </head>
 <body>
-    <div class="navbar">Raise hand here to turn on labels</div>
+    <div class="navbar" onclick="toggleImage()">Raise hand here to turn on/off labels</div>
     <div class="container">
-        <div class="banner left">Walk here to go back to menu!</div>
-        <div class="banner right">Walk here to start "Quiz" mode!</div>
+        <div class="banner left"><a href="index.html" style="text-decoration: none; color: inherit;">Walk here to go back to menu!</a></div>
+        <div class="banner right"><a href="quiz_mode.html" style="text-decoration: none; color: inherit;">Walk here to start "Quiz" mode!</a></div>
         <div class="picture">
-            <img id="learning_image" src="label.png" onclick="changeImage()" height="700">
+            <img id="learning_image" src="label.png" height="700">
         </div>
     </div>
 </body>

@@ -29,12 +29,14 @@ body {
 
 .banner.left {
     left: 0;
+    width: 5rem;
     background-color: #D4EBFF;
     color: black;
 }
 
 .banner.right {
     right: 0;
+    width: 5rem;
     background-color: #D4EBFF;
     color: black;
 }
