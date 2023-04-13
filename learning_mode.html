@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Quiz Mode</title>
+    <title>Learning Mode</title>
+    <script>
+        function changeImage() {
+          document.getElementById("learning_image").src = "no_label.png";
+          document.getElementById("learning_image").height="700"
+        }
+    </script>
     <style>
         body {
             background-color: #369FFF;
@@ -73,7 +79,7 @@
         <div class="banner left">Walk here to go back to menu!</div>
         <div class="banner right">Walk here to start "Quiz" mode!</div>
         <div class="picture">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Internal_organs.png" height="700" alt="Example Picture">
+            <img id="learning_image" src="label.png" onclick="changeImage()" height="700">
         </div>
     </div>
 </body>
