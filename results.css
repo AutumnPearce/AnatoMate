@@ -37,6 +37,18 @@ body {
     font-size: 18px; /* Font size of the text inside the square */
 }
 
+.next-q-square {
+    position: absolute; /* Absolute positioning to overlap content */
+    top: 0; /* Positioned at the top */
+    right: 0; /* Positioned at the left */
+    width: 150px; /* Width of the square */
+    height: 100px; /* Height of the square */
+    background-color: #D4EBFF; /* Background color of the square */
+    color: black; /* Text color inside the square */
+    padding: 20px; /* Padding inside the square */
+    font-size: 18px; /* Font size of the text inside the square */
+}
+
 .t {
  font-family: 'McLaren', sans-serif;
     background-color: #369FFF;
