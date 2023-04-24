@@ -2,6 +2,7 @@
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css2?family=McLaren&display=swap" rel="stylesheet">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="learning_mode.css">
     <title>Learning Mode</title>
     <script>
@@ -34,4 +35,120 @@
         </div>
     </div>
 </body>
+<script>
+var host = "cpsc484-02.yale.internal:8888";
+
+let handup = false;
+let handup_timestamp = 0;
+
+let standing_left = false;
+let standing_left_timestamp = 0;
+
+let standing_right = false;
+let standing_right_timestamp = 0;
+
+$(document).ready(function () {
+    frames.start();
+});
+
+var frames = {
+    socket: null,
+
+    start: function () {
+        var url = "ws://" + host + "/frames";
+        frames.socket = new WebSocket(url);
+        frames.socket.onmessage = function (event) {
+            frames.show(JSON.parse(event.data));
+        }
+    },
+
+    show: function (frame) {
+        let head = frame.people[0].joints[26];
+        let left_hand = frame.people[0].joints[8];
+
+        console.log(head.pixel);
+
+        if (head.pixel.y < left_hand.pixel.y) {
+            handup = false;
+            handup_timestamp = 0;
+        } else {
+            if (handup == false) {
+                handup = true;
+                handup_timestamp = frame.ts;
+            } else {
+                time_delta = frame.ts - handup_timestamp;
+
+                time_delta_clean = 2 - Math.floor(time_delta/1000)
+                // document.getElementById("txt").innerHTML = time_delta_clean;
+
+                if (time_delta > 2000) {
+                    toggleImage();
+                    handup = false;
+                } 
+            }
+        }
+
+        if (head.pixel.x < 700) {
+          standing_left = false;
+          standing_left_timestamp = 0;
+        } else {
+            if (standing_left == false) {
+                standing_left = true;
+                standing_left_timestamp = frame.ts;
+            } else {
+                time_delta = frame.ts - standing_left_timestamp;
+                time_delta_clean = 2 - Math.floor(time_delta/1000)
+                if (time_delta > 2000) {
+                    console.log("LEFT")
+                    window.location.href=window.location.href.replace("learning_mode.html", "index.html");
+                } 
+            }
+        }
+
+        if (head.pixel.x > 300) {
+          standing_right = false;
+          standing_right_timestamp = 0;
+        } else {
+            if (standing_right == false) {
+                standing_right = true;
+                standing_right_timestamp = frame.ts;
+            } else {
+                time_delta = frame.ts - standing_right_timestamp;
+                time_delta_clean = 2 - Math.floor(time_delta/1000)
+                if (time_delta > 2000) {
+                    console.log("right")
+                    window.location.href=window.location.href.replace("learning_mode.html", "quiz_mode1.html");
+                } 
+            }
+        }
+
+
+
+        // document.getElementById("txt").innerHTML = msg;
+    }
+};
+
+var twod = {
+    socket: null,
+
+    // create a connection to the camera feed
+    start: function () {
+        var url = "ws://" + host + "/twod";
+        twod.socket = new WebSocket(url);
+
+        // whenever a new frame is received...
+        twod.socket.onmessage = function (event) {
+
+            // parse and show the raw data
+            twod.show(JSON.parse(event.data));
+        }
+    },
+
+    // show the image by adjusting the source attribute of the HTML img object previously created
+    show: function (twod) {
+        $('img.twod').attr("src", 'data:image/pnjpegg;base64,' + twod.src);
+    },
+};
+
+</script>
 </html>
