@@ -1,61 +1,118 @@
 body {
-    font-family: 'McLaren', sans-serif; /* Set font to McLaren */
+    font-family: 'McLaren', sans-serif;
     background-color: #369FFF;
 }
+
 .container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5px;
+    padding: 0 1rem;
+}
+
+.left,
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-left {
+    text-align: left;
+    margin-top: -300px;
+    margin-left: -20px;
+}
+
+.banner-right {
+    text-align: right;
+    margin-top: -300px;
+    margin-right: -20px;
+}
+
+button {
+    font-family: 'McLaren', sans-serif;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 200px;
+    height: 100px;
+    background-color: #D4EBFF9f;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 0px solid black;
+}
+
+.exit-square {
+    position: absolute;
+    top: 5;
+    left: 5;
+    width: 150px;
+    height: 100px;
+    background-color: #D4EBFF9f;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.middle-content {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.left, .right {
-    flex: 1;
-    text-align: center;
-    font-size: 24px;
-}
-
-.left {
-    font-family: 'McLaren', sans-serif; /* Set font to McLaren */
-    border: 2px solid black;
- }
-
-.right {
-    font-family: 'McLaren', sans-serif; /* Set font to McLaren */
-    border: 2px solid black;
- }
-/* Style for the square */
-.exit-square {
-    position: absolute; /* Absolute positioning to overlap content */
-    top: 0; /* Positioned at the top */
-    left: 0; /* Positioned at the left */
-    width: 150px; /* Width of the square */
-    height: 100px; /* Height of the square */
-    background-color: #D4EBFF; /* Background color of the square */
-    color: black; /* Text color inside the square */
-    padding: 20px; /* Padding inside the square */
-    font-size: 18px; /* Font size of the text inside the square */
-}
-
-.t {
- font-family: 'McLaren', sans-serif;
+.middle-content .t {
+    font-family: 'McLaren', sans-serif;
     background-color: #369FFF;
     font-size: 54px;
+    bottom: 10px;
+    margin-top: 100px;
+    margin-bottom: 40px;
 }
-.t2 {
-    font-family: 'McLaren', sans-serif; /* Set font to McLaren */
+
+.results .t {
+    font-family: 'McLaren', sans-serif;
+    background-color: #369FFF;
+    font-size: 54px;
+    bottom: 10px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.middle-content .t2 {
+    font-family: 'McLaren', sans-serif;
     background-color: #369FFF;
     font-size: 30px;
+    margin-bottom: 20px;
 }
 
 .t3 {
-    font-family: 'McLaren', sans-serif; /* Set font to McLaren */
+    font-family: 'McLaren', sans-serif;
     background-color: #369FFF;
     font-size: 30px;
 }
 
 .skeleton img {
-    height: 600px;
+    margin-top: 50px;
+    height: 500px;
     position: relative;
     bottom: 100px;
     left: 20px;

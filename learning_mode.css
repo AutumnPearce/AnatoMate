@@ -6,6 +6,23 @@ body {
     
 }
 
+.middle-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.picture {
+    margin-top: 100px;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -30,34 +47,58 @@ body {
 .banner.left {
     left: 0;
     width: 5rem;
-    background-color: #D4EBFF;
     color: black;
 }
 
 .banner.right {
     right: 0;
     width: 5rem;
-    background-color: #D4EBFF;
     color: black;
 }
 
 .navbar {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 10px;
+    left: 470px;
+    right: 100px;
+    width: 150px;
     height: 70px;
-    background-color: #D4EBFF;
+    background-color: #D4EBFF9f;
     color: black;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
     padding: 0 20px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
-.picture {
-    position: relative;
-    margin-top: 50px;
+.left-arrow::before,
+.right-arrow::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.left-arrow::before {
+    border-width: 30px 40px 30px 0;
+    border-color: transparent #f1f1f1 transparent transparent;
+    position: absolute;
+    left: 50px;
+    top: 300px;
+    transform: translateY(-50%);
+}
+
+.right-arrow::before {
+    border-width: 30px 0 30px 40px;
+    border-color: transparent transparent transparent #f1f1f1;
+    position: absolute;
+    right: 50px;
+    top: 300px;
+    transform: translateY(-50%);
 }

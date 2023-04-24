@@ -7,32 +7,35 @@
     <title>Learning Mode</title>
     <script>
         function toggleImage() {
-          var learningImage = document.getElementById("learning_image");
-          var imageName = learningImage.src.split('/').pop();
-          
-          if (imageName === "label.png") {
-            learningImage.src = "no_label.png";
-          } else {
-            learningImage.src = "label.png";
-          }
-          learningImage.height="700";
-        }
+            var learningImage = document.getElementById("learning_image");
+            var imageName = learningImage.src.split('/').pop();
+            
+            if (imageName === "label.png") {
+                learningImage.src = "no_label.png";
+            } else {
+                learningImage.src = "label.png";
+            }
+            learningImage.height="700";
+            }
     </script>
 </head>
 <body>
-    <div class="navbar" onclick="toggleImage()" style="cursor: pointer;">
-      Raise hand here to turn on/off labels
-    </div>
-    <div class="container">
-        <div class="banner left">
-          <a href="index.html" style="text-decoration: none; color: inherit;">Walk here to go back to menu!</a>
-        </div>
-        <div class="banner right">
-          <a href="quiz_mode1.html" style="text-decoration: none; color: inherit; cursor: pointer;">Walk here to start "Quiz" mode!</a>
+
+    <div class="middle-content">
+        <div class="navbar" onclick="toggleImage()" style="cursor: pointer;">
+            Turn labels on/off
         </div>
         <div class="picture">
             <img id="learning_image" src="label.png" height="700">
         </div>
+    </div>
+    <div class="container">
+        <div class="banner left left-arrow">
+            <a href="index.html" style="text-decoration: none; color: inherit;">Main Menu!</a>
+        </div>
+        <div class="banner right right-arrow">
+            <a href="quiz_mode1.html" style="text-decoration: none; color: inherit; cursor: pointer;">Quiz Mode!</a>
+        </div>        
     </div>
 </body>
 <script>

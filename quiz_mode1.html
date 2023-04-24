@@ -4,30 +4,114 @@
     <title>Quiz mode</title>
     <link href="https://fonts.googleapis.com/css2?family=McLaren&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="quiz_mode.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-  <div class="exit-square">
-    <a href="learning_mode.html" style="text-decoration: none; color: inherit; cursor: pointer;">Raise hand here to exit quiz mode</a>
-  </div>
-    <div class="t"><center>Quiz Mode</center></div>
-    <div class="t2"><center>Question 1: Where Are The Lungs?</center></div>
-    <div class="container">
-        <div class="left" style="cursor: pointer;">
-          <a href="results1.html?N" style="text-decoration: none; color: inherit; cursor: pointer;">
-            <img src="circle.png" height="300px">
-            <p>Move hand here to select</p>
-          </a>
+	<div class="exit-square">
+		<a href="learning_mode.html" style="text-decoration: none; color: inherit; cursor: pointer;">Exit Quiz Mode</a>
+	</div>
+    <div id="quiz-mode">
+        <div class="middle-content">
+            <div class="t">Quiz Mode - Score: <span id="score">0</span></div>
+            <div class="t2">Question 1: Where Are The Lungs?</div>
+            <div class="skeleton"><img src="q1.png"></div>
         </div>
-        <div class="skeleton">
-          <img src="q1.png">
+        <div class="container">
+            <div class="left banner-left" style="cursor: pointer;" onclick="showResults(0);">
+                <img src="circle.png" height="300px">
+            </div>
+            <div class="right banner-right" style="cursor: pointer;" onclick="showResults(1);">
+                <img src="star.png" height="300px">
+            </div>
         </div>
-        <div class="right" style="cursor: pointer;">
-          <a href="results1.html?Y" style="text-decoration: none; color: inherit; cursor: pointer;">
-            <img src="star.png" height="300px">
-            <p>Move hand here to select</p>
-          </a>
-        </div>
+		<button id="continue-button" onclick="continueQuiz()">Continue</button>
     </div>
+	<script>
+
+	var questions = [
+		{
+			question: "Question 1: Where Are The Lungs?",
+			choices: ["circle.png", "star.png"],
+			correctAnswer: 1,
+			image: "q1.png"
+		},
+		{
+			question: "Question 2: Where Is The Spleen?",
+			choices: ["circle.png", "star.png"],
+			correctAnswer: 0,
+			image: "q2.png"
+		},
+		{
+			question: "Question 3: Where Is The Pharynx?",
+			choices: ["circle.png", "star.png"],
+			correctAnswer: 0,
+			image: "q3.png"
+		},
+		{
+			question: "Question 4: Where Are The Lymph Nodes?",
+			choices: ["circle.png", "star.png"],
+			correctAnswer: 1,
+			image: "q4.png"
+		},
+		{
+			question: "Question 5: Where Is The Liver?",
+			choices: ["circle.png", "star.png"],
+			correctAnswer: 0,
+			image: "q5.png"
+		},
+	];
+
+	var currentQuestionIndex = 0;
+	var correctAnswers = 0;
+
+	function renderQuestion() {
+		var question = questions[currentQuestionIndex];
+		document.querySelector('.t2').innerText = question.question;
+		document.querySelector('.skeleton img').src = question.image;
+		document.getElementById('continue-button').style.display = 'none';
+		document.querySelector('.left.banner-left img').src = question.choices[0];
+		document.querySelector('.right.banner-right img').src = question.choices[1];
+	}
+
+	function showResults(selectedAnswer) {
+		var question = questions[currentQuestionIndex];
+		var isCorrect = selectedAnswer === question.correctAnswer;
+
+		if (isCorrect) {
+			correctAnswers++;
+			document.getElementById('score').innerText = correctAnswers;
+			document.querySelector('.t2').innerText = 'Correct!';
+		} else {
+			document.querySelector('.t2').innerText = 'Incorrect!';
+		}
+
+		document.getElementById('continue-button').style.display = 'block';
+
+		var incorrectChoice = document.querySelector('.container').children[selectedAnswer === 0 ? 1 : 0];
+		incorrectChoice.style.display = 'none';
+	}
+
+	function continueQuiz() {
+		document.querySelector('.left.banner-left').style.display = 'block';
+		document.querySelector('.right.banner-right').style.display = 'block';
+		
+		currentQuestionIndex++;
+		
+		if (currentQuestionIndex < questions.length) {
+			renderQuestion();
+			document.getElementById('continue-button').style.display = 'none';
+		} else {
+			var finalResultsContent = `
+				<div class="middle-content">
+					<div class="t">Quiz Results</div>
+					<div class="t2">You got ${correctAnswers} out of ${questions.length} correct!</div>
+				</div>
+			`;
+			document.getElementById('quiz-mode').innerHTML = finalResultsContent;
+		}
+	}
+
+	renderQuestion();
+</script>
 </body>
 </html>
-
