@@ -17,12 +17,12 @@ body {
 
 .left {
     font-family: 'McLaren', sans-serif; /* Set font to McLaren */
-    padding-bottom: 100px;
+    border: 2px solid black;
  }
 
 .right {
     font-family: 'McLaren', sans-serif; /* Set font to McLaren */
-    padding-bottom: 100px;
+    border: 2px solid black;
  }
 /* Style for the square */
 .exit-square {

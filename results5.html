@@ -4,6 +4,16 @@
     <title>Results</title>
     <link href="https://fonts.googleapis.com/css2?family=McLaren&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="results.css">
+    <script>
+      window.onload = function(){
+          var result = window.location.href.split("?")[1];
+          if (result === "Y") {
+            document.getElementById('feedback').innerHTML = "Correct!";
+          } else {
+            document.getElementById('feedback').innerHTML = "Incorrect!";
+          }
+      };
+    </script>
 </head>
 <body>
   <div class="exit-square">
@@ -12,18 +22,20 @@
   <div class="next-q-square">
     <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer;">Raise hand here to go back to home screen</a>
   </div>
+  <div>
     <div class="t"><center>Results: Q5</center></div>
-    <div class="t2"><center>Correct!</center></div>
-    <div class="container">
-        <div class="left" style="cursor: pointer;">
-            <h1>Green Circle</h1>
-        </div>
-        <div class="skeleton">
-          <img src="no_label.png">
-        </div>
-        <div class="right" style="cursor: pointer;">
-            <h1>Pink Star</h1>
-        </div>
+    <div class="t2"><center><p id="feedback"></p></center></div>
+  </div>
+  <div class="container">
+    <div class="left" style="cursor: pointer; border: 2px solid black;">
+      <img src="circle.png" height="300px">
     </div>
+    <div class="skeleton">
+      <img src="q2.png">
+    </div>
+    <div class="right" style="cursor: pointer">
+      
+    </div>
+  </div>
 </body>
 </html>
