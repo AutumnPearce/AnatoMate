@@ -3,6 +3,7 @@
 <head>
     <title>Results</title>
     <link href="https://fonts.googleapis.com/css2?family=McLaren&display=swap" rel="stylesheet">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="results.css">
     <script>
       window.onload = function(){
@@ -38,4 +39,83 @@
       </div>
   </div>
 </body>
+<script>
+  var host = "cpsc484-02.yale.internal:8888";
+let hand_left = false;
+let hand_left_timestamp = 0;
+
+let hand_right = false;
+let hand_right_timestamp = 0;
+
+$(document).ready(function () {
+    frames.start();
+});
+
+var frames = {
+    socket: null,
+
+    start: function () {
+        var url = "ws://" + host + "/frames";
+        frames.socket = new WebSocket(url);
+        frames.socket.onmessage = function (event) {
+            frames.show(JSON.parse(event.data));
+        }
+    },
+
+    show: function (frame) {
+        let head = frame.people[0].joints[26];
+        let left_hand = frame.people[0].joints[8];
+
+        console.log("head " + JSON.stringify(head.pixel));
+        console.log("hand " + JSON.stringify(left_hand.pixel));
+
+        // if (head.pixel.y > left_hand.pixel.y) {
+        //   console.log("OVER HEAD")
+        //   if (head.pixel.x < left_hand.pixel.x) {
+        //     console.log("LEFT")
+        //   } else {
+        //     console.log("RIGHT")
+        //   }
+        // }
+
+        if (!(head.pixel.y > left_hand.pixel.y && head.pixel.x < left_hand.pixel.x)) {
+          hand_left = false;
+          hand_left_timestamp = 0;
+        } else {
+            if (hand_left == false) {
+                hand_left = true;
+                hand_left_timestamp = frame.ts;
+            } else {
+                time_delta = frame.ts - hand_left_timestamp;
+                time_delta_clean = 2 - Math.floor(time_delta/1000)
+                if (time_delta > 2000) {
+                    console.log("LEFT")
+                    window.location.href=window.location.href.replace("?Y","").replace("?N","").replace("results1.html", "learning_mode.html");
+                } 
+            }
+        }
+
+        if (!(head.pixel.y > left_hand.pixel.y && head.pixel.x > left_hand.pixel.x)) {
+          hand_right = false;
+          hand_right_timestamp = 0;
+        } else {
+            if (hand_right == false) {
+                hand_right = true;
+                hand_right_timestamp = frame.ts;
+            } else {
+                time_delta = frame.ts - hand_right_timestamp;
+                time_delta_clean = 2 - Math.floor(time_delta/1000)
+                if (time_delta > 2000) {
+                    console.log("right")
+                    window.location.href=window.location.href.replace("?Y","").replace("?N","").replace("results1.html", "quiz_mode2.html");
+                } 
+            }
+        }
+
+
+
+        // document.getElementById("txt").innerHTML = msg;
+    }
+};
+</script>
 </html>

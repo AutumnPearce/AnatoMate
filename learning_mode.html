@@ -41,6 +41,29 @@
 <script>
 var host = "cpsc484-02.yale.internal:8888";
 
+function AngleBetween(pointP, pointQ, pointR) {
+  
+  // Calculate the vectors PQ and PR
+  let vectorPQ = { x: pointQ.x - pointP.x, y: pointQ.y - pointP.y };
+  let vectorPR = { x: pointR.x - pointP.x, y: pointR.y - pointP.y };
+
+  // Calculate the dot product of vectors PQ and PR
+  let dotProduct = vectorPQ.x * vectorPR.x + vectorPQ.y * vectorPR.y;
+
+  // Calculate the magnitude of vectors PQ and PR
+  let magnitudePQ = Math.sqrt(vectorPQ.x * vectorPQ.x + vectorPQ.y * vectorPQ.y);
+  let magnitudePR = Math.sqrt(vectorPR.x * vectorPR.x + vectorPR.y * vectorPR.y);
+
+  // Calculate the cosine of the angle between vectors PQ and PR
+  let cosine = dotProduct / (magnitudePQ * magnitudePR);
+
+  // Calculate the angle in radians and convert to degrees
+  let angle = Math.acos(cosine) * 180 / Math.PI;
+  
+  return angle;
+  
+  }
+
 let handup = false;
 let handup_timestamp = 0;
 
@@ -68,6 +91,15 @@ var frames = {
     show: function (frame) {
         let head = frame.people[0].joints[26];
         let left_hand = frame.people[0].joints[8];
+        let right_hand = frame.people[0].joints[15];
+        let left_shoulder = frame.people[0].joints[5];
+        let right_shoulder = frame.people[0].joints[12];
+        let pelvis = frame.people[0].joints[0];
+
+        let left_angle = AngleBetween(left_shoulder.pixel, left_hand.pixel, pelvis.pixel);
+        console.log("left_angle " + left_angle)
+        let right_angle = AngleBetween(right_shoulder.pixel, right_hand.pixel, pelvis.pixel);
+        console.log("right_angle " + right_angle)
 
         console.log(head.pixel);
 
@@ -91,7 +123,7 @@ var frames = {
             }
         }
 
-        if (head.pixel.x < 700) {
+        if (!(left_angle < 120 && left_angle > 70)) {
           standing_left = false;
           standing_left_timestamp = 0;
         } else {
@@ -104,11 +136,12 @@ var frames = {
                 if (time_delta > 2000) {
                     console.log("LEFT")
                     window.location.href=window.location.href.replace("learning_mode.html", "index.html");
+                    // window.location.pathname = '/index.html'
                 } 
             }
         }
 
-        if (head.pixel.x > 300) {
+        if (!(right_angle < 120 && right_angle > 70)) {
           standing_right = false;
           standing_right_timestamp = 0;
         } else {
@@ -121,6 +154,7 @@ var frames = {
                 if (time_delta > 2000) {
                     console.log("right")
                     window.location.href=window.location.href.replace("learning_mode.html", "quiz_mode1.html");
+                    // window.location.pathname = '/quiz_mode1.html'
                 } 
             }
         }
@@ -129,28 +163,6 @@ var frames = {
 
         // document.getElementById("txt").innerHTML = msg;
     }
-};
-
-var twod = {
-    socket: null,
-
-    // create a connection to the camera feed
-    start: function () {
-        var url = "ws://" + host + "/twod";
-        twod.socket = new WebSocket(url);
-
-        // whenever a new frame is received...
-        twod.socket.onmessage = function (event) {
-
-            // parse and show the raw data
-            twod.show(JSON.parse(event.data));
-        }
-    },
-
-    // show the image by adjusting the source attribute of the HTML img object previously created
-    show: function (twod) {
-        $('img.twod').attr("src", 'data:image/pnjpegg;base64,' + twod.src);
-    },
 };
 
 </script>

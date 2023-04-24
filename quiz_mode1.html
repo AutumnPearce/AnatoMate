@@ -3,10 +3,16 @@
 <head>
     <title>Quiz mode</title>
     <link href="https://fonts.googleapis.com/css2?family=McLaren&display=swap" rel="stylesheet">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="quiz_mode.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+
+    <div id="cursor">
+    </div>
+
 	<div class="exit-square">
 		<a href="learning_mode.html" style="text-decoration: none; color: inherit; cursor: pointer;">Exit Quiz Mode</a>
 	</div>
@@ -114,4 +120,163 @@
 	renderQuestion();
 </script>
 </body>
+<script>
+  var host = "cpsc484-02.yale.internal:8888";
+
+  function AngleBetween(pointP, pointQ, pointR) {
+  
+  // Calculate the vectors PQ and PR
+  let vectorPQ = { x: pointQ.x - pointP.x, y: pointQ.y - pointP.y };
+  let vectorPR = { x: pointR.x - pointP.x, y: pointR.y - pointP.y };
+
+  // Calculate the dot product of vectors PQ and PR
+  let dotProduct = vectorPQ.x * vectorPR.x + vectorPQ.y * vectorPR.y;
+
+  // Calculate the magnitude of vectors PQ and PR
+  let magnitudePQ = Math.sqrt(vectorPQ.x * vectorPQ.x + vectorPQ.y * vectorPQ.y);
+  let magnitudePR = Math.sqrt(vectorPR.x * vectorPR.x + vectorPR.y * vectorPR.y);
+
+  // Calculate the cosine of the angle between vectors PQ and PR
+  let cosine = dotProduct / (magnitudePQ * magnitudePR);
+
+  // Calculate the angle in radians and convert to degrees
+  let angle = Math.acos(cosine) * 180 / Math.PI;
+  
+  return angle;
+  
+  }
+  
+  let left_handup = false;
+  let left_handup_timestamp = 0;
+
+  let right_handup = false;
+  let right_handup_timestamp = 0;
+  
+  let standing_left = false;
+  let standing_left_timestamp = 0;
+  
+  let standing_right = false;
+  let standing_right_timestamp = 0;
+  
+  $(document).ready(function () {
+      frames.start();
+  });
+  
+  var frames = {
+      socket: null,
+  
+      start: function () {
+          var url = "ws://" + host + "/frames";
+          frames.socket = new WebSocket(url);
+          frames.socket.onmessage = function (event) {
+              frames.show(JSON.parse(event.data));
+          }
+      },
+  
+      show: function (frame) {
+          let head = frame.people[0].joints[26];
+          let left_hand = frame.people[0].joints[8];
+          let right_hand = frame.people[0].joints[15];
+          let left_shoulder = frame.people[0].joints[5];
+          let right_shoulder = frame.people[0].joints[12];
+          let pelvis = frame.people[0].joints[0];
+
+          let left_angle = AngleBetween(left_shoulder.pixel, left_hand.pixel, pelvis.pixel);
+          console.log("left_angle " + left_angle)
+          let right_angle = AngleBetween(right_shoulder.pixel, right_hand.pixel, pelvis.pixel);
+          console.log("right_angle " + right_angle)
+
+          $("#cursor").css({left: `${(left_hand.pixel.x / 1280) * 100}vw`, top: `${(left_hand.pixel.y / 720)* 100}vw`})
+          
+          console.log(head.pixel);
+  
+          if (head.pixel.y < left_hand.pixel.y) {
+              left_handup = false;
+              left_handup_timestamp = 0;
+          } else {
+              if (left_handup == false) {
+                  left_handup = true;
+                  left_handup_timestamp = frame.ts;
+              } else {
+                  time_delta = frame.ts - left_handup_timestamp;
+  
+                  time_delta_clean = 2 - Math.floor(time_delta/1000)
+                  // document.getElementById("txt").innerHTML = time_delta_clean;
+  
+                  if (time_delta > 2000) {
+                    window.location.href=window.location.href.replace("quiz_mode1.html", "learning_mode.html");
+                  } 
+              }
+          }
+
+          if (head.pixel.y < right_hand.pixel.y) {
+                right_handup = false;
+                right_handup_timestamp = 0;
+            } else {
+                if (right_handup == false) {
+                    right_handup = true;
+                    right_handup_timestamp = frame.ts;
+                } else {
+                    time_delta = frame.ts - right_handup_timestamp;
+
+                    time_delta_clean = 2 - Math.floor(time_delta/1000)
+                    // document.getElementById("txt").innerHTML = time_delta_clean;
+
+                    if (time_delta > 2000) {
+                        console.log("RIGHT HAND" + document.getElementById('continue-button').style.display)
+                        if (document.getElementById('continue-button').style.display != 'none') {
+                            continueQuiz()
+                        }
+                    } 
+                }
+            }
+  
+          if (!(left_angle < 120 && left_angle > 70)) {
+            standing_left = false;
+            standing_left_timestamp = 0;
+          } else {
+              if (standing_left == false) {
+                  standing_left = true;
+                  standing_left_timestamp = frame.ts;
+              } else {
+                  time_delta = frame.ts - standing_left_timestamp;
+                  time_delta_clean = 2 - Math.floor(time_delta/1000)
+                  if (time_delta > 2000) {
+                      console.log("LEFT")
+                      if (document.getElementById('continue-button').style.display == 'none') {
+                      showResults(0)
+                      }
+                    //   window.location.href=window.location.href.replace("quiz_mode1.html", "results1.html?N");
+                      // window.location.pathname = '/index.html'
+                  } 
+              }
+          }
+  
+          if (!(right_angle < 120 && right_angle > 70)) {
+            standing_right = false;
+            standing_right_timestamp = 0;
+          } else {
+              if (standing_right == false) {
+                  standing_right = true;
+                  standing_right_timestamp = frame.ts;
+              } else {
+                  time_delta = frame.ts - standing_right_timestamp;
+                  time_delta_clean = 2 - Math.floor(time_delta/1000)
+                  if (time_delta > 2000) {
+                      console.log("right")
+                      if (document.getElementById('continue-button').style.display == 'none') {
+                      showResults(1);
+                      }
+                    //   window.location.href=window.location.href.replace("quiz_mode1.html", "results1.html?Y");
+                      // window.location.pathname = '/quiz_mode1.html'
+                  } 
+              }
+          }
+  
+  
+  
+          // document.getElementById("txt").innerHTML = msg;
+      }
+  };
+</script>  
 </html>

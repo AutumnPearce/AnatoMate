@@ -117,3 +117,11 @@ button {
     bottom: 100px;
     left: 20px;
 }
+
+#cursor {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    position: absolute;
+    background-color: red;
+}
