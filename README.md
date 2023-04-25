@@ -8,6 +8,7 @@ The tasks addressed in this learning tool are:
 
 # How to Use
 
+For web server demo:
 To set up the website, download the source files and open the <code>index.html</code> file in a web browser. Users can navigate between pages by clicking on the appropriate text or banners.
 
 You may follow the instructions below to demo the website:
@@ -18,22 +19,28 @@ You may follow the instructions below to demo the website:
 4. Hit (alt+L, alt+O) to Open the Server and (alt+L, alt+C) to Stop the server (You can change the shortcut form keybinding). [On MAC, cmd+L, cmd+O and cmd+L, cmd+C]
 5. Open the Command Pallete by pressing F1 or ctrl+shift+P and type Live Server: Open With Live Server to start a server or type Live Server: Stop Live Server to stop a server.
 
+For Kinect demo:
+- ... instructions to be added. add instructions from course page probably
+
 # Dependencies
 
+For web live server demo:
 Recommended extension to download:
 - Live Server Web Extension
 
+For Kinect demo:
+- ... instructions to be added
+
 # Constraints
 
-possible constraints:
-- too many people 
+- If there are more than one person within detection range, the program will not be able to detect the person closest to the camera and will throw a warning message.
 - standing too close etc.
 
 ---
 
 # Collaboration record
 
-- Serena Ulammandakh (tu54): css, quiz results, quiz DOM
+- Serena Ulammandakh (tu54): Changed the .css files to make the images, titles, and headers centered-ish and changed aesthetic styling of all the relevant .html pages. Added initial page connection between the html pages and implemented click event listeners to be modified later for display functionality. Compiled all the html quiz and results pages into one .html page that displays quiz questions (using javascript) and the corrosponding correct answers after each selection. Quiz mode shows the quiz results at the end. Wrote out README.md file.  
 - Aviv Melamud
 - Autumn Pearce
 - Nikhil Ismail (ni58): coded out quiz and results pages (js, html, css), coded user feedback for quiz (incorrect/correct message)
