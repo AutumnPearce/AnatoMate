@@ -26,7 +26,7 @@
             Turn labels on/off
         </div>
         <div class="picture">
-            <img id="learning_image" src="label.png" height="700">
+            <img id="learning_image" src="no_label.png" height="700">
         </div>
     </div>
     <div class="container">
@@ -73,6 +73,8 @@ let standing_left_timestamp = 0;
 let standing_right = false;
 let standing_right_timestamp = 0;
 
+var learningImage = document.getElementById("learning_image");
+
 $(document).ready(function () {
     frames.start();
 });
@@ -103,24 +105,10 @@ var frames = {
 
         console.log(head.pixel);
 
-        if (head.pixel.y < left_hand.pixel.y) {
-            handup = false;
-            handup_timestamp = 0;
+        if ((head.pixel.y > left_hand.pixel.y) || (head.pixel.y > right_hand.pixel.y)) {
+            learningImage.src = "label.png";
         } else {
-            if (handup == false) {
-                handup = true;
-                handup_timestamp = frame.ts;
-            } else {
-                time_delta = frame.ts - handup_timestamp;
-
-                time_delta_clean = 2 - Math.floor(time_delta/1000)
-                // document.getElementById("txt").innerHTML = time_delta_clean;
-
-                if (time_delta > 2000) {
-                    toggleImage();
-                    handup = false;
-                } 
-            }
+            learningImage.src = "no_label.png";
         }
 
         if (!(left_angle < 120 && left_angle > 70)) {
