@@ -58,9 +58,10 @@
             console.log(frame);
             let head = frame.people[0].joints[26];
             let left_hand = frame.people[0].joints[8];
+            let right_hand = frame.people[0].joints[15];
 
             let msg;
-            if (head.pixel.y < left_hand.pixel.y) {
+            if (!((head.pixel.y > left_hand.pixel.y) || (head.pixel.y > right_hand.pixel.y))) {
                 msg = "HAND DOWN";
                 handup = false;
                 handup_timestamp = 0;
