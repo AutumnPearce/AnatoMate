@@ -18,11 +18,7 @@ Zip the project folder and upload it to the kinect server. Follow the instructio
 
 # Dependencies
 
-For web live server demo:
-Recommended extension to download:
-- Live Server Web Extension
-
-There are no additional dependencies.
+There are no dependenices, only a web browser is required. The project can run by opening <code>index.html</code> in a browser.
 
 # Constraints
 
