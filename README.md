@@ -33,7 +33,7 @@ For Kinect demo:
 
 # Constraints
 
-- If there are more than one person within detection range, the program will not be able to detect the person closest to the camera and will throw a warning message.
+- If there are more than one person within detection range, there is no current way to indicate which person should control the display.
 - standing too close etc.
 
 ---
