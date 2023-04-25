@@ -36,7 +36,7 @@ possible constraints:
 - Serena Ulammandakh (tu54): css, quiz results, quiz DOM
 - Aviv Melamud
 - Autumn Pearce
-- Nikhil Ismail
+- Nikhil Ismail (ni58): coded out quiz and results pages (js, html, css), coded user feedback for quiz (incorrect/correct message)
 
 
 
