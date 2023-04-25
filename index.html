@@ -6,6 +6,13 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
+
+        <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h1>Too many people</h1>
+        </div>
+        </div>
+
         <div class="title-screen">
             <h1>AnatoMate</h1>
             <a href="learning_mode.html"><h2>Raise left hand to view tutorial and start learning about your anatomy!</h2></a>
@@ -38,6 +45,16 @@
         },
 
         show: function (frame) {
+
+            console.log(frame.people.length)
+            var modal = document.getElementById("myModal");
+            if (frame.people.length > 1) {
+                modal.style.display = "block";
+                return;
+            } else {
+                modal.style.display = "none";
+            }
+
             console.log(frame);
             let head = frame.people[0].joints[26];
             let left_hand = frame.people[0].joints[8];
