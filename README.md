@@ -41,7 +41,7 @@ For Kinect demo:
 # Collaboration record
 
 - Serena Ulammandakh (tu54): Changed the .css files to make the images, titles, and headers centered-ish and changed aesthetic styling of all the relevant .html pages. Added initial page connection between the html pages and implemented click event listeners to be modified later for display functionality. Compiled all the html quiz and results pages into one .html page that displays quiz questions (using javascript) and the corrosponding correct answers after each selection. Quiz mode shows the quiz results at the end. Wrote out README.md file.  
-- Aviv Melamud
+- Aviv Melamud (am3795): Wrote javascript code to read data from the kinect and interpret hand gestures by calculating the angles between joints (i.e. determine if hand is raised by calculating angle between hand, shoulder, and pelvis) and by comparing relative positions (check if hand is higher then head). Made screens react to hand gesturs (switching images and screens when appropriate).
 - Autumn Pearce
 - Nikhil Ismail (ni58): coded out quiz and results pages (js, html, css), coded user feedback for quiz (incorrect/correct message)
 
