@@ -27,15 +27,15 @@ body {
     position: absolute;
     left: 5vw;
     top: 0vw;
-    height: 15vh;
+    height: 25vh;
     transform: translateX(-50%);
 }
 
 #right_out {
     position: absolute;
-    right: -3vw;
+    right: -7vw;
     top: 0vw;
-    height: 18vh;
+    height: 27vh;
     transform: translateX(-50%);
 }
 
@@ -44,6 +44,11 @@ body {
     margin: 0 auto;
     padding: 20px;
     text-align: center;
+}
+
+.container a {
+    font-size: 4vh;
+    top: 50vh;
 }
 
 .banner {
